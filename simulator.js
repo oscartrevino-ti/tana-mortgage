@@ -57,7 +57,7 @@ function formatAndSetCurrencyValue(value, element) {
   element.value = formattedValue;
 }
 
-
+// Jquery Dependency
 $("input[data-type='currency']").on({
   keyup: function() {
     formatCurrency($(this));
@@ -140,10 +140,6 @@ var updated_len = input_val.length;
 caret_pos = updated_len - original_len + caret_pos;
 input[0].setSelectionRange(caret_pos, caret_pos);
 }
-
-
-
-
 
 
 
@@ -280,9 +276,6 @@ function (e) {
     formatAndSetCurrencyValue(totalCosts15, closingCosts_15);
 
 
-
-
-
     /*========================== 10 YEARS CALCULATE =============================*/
     var payment10 = (amt*(apr * Math.pow((1 + apr), term10))/(Math.pow((1 + apr), term10) - 1)).toFixed(2);
     montlyPayment_10.value = payment10
@@ -335,9 +328,6 @@ function (e) {
 
 
 });
-
-
-
 
 
 /*========================== RESET FORM =============================*/
