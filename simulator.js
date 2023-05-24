@@ -58,23 +58,15 @@ function formatAndSetCurrencyValue(value, element) {
 }
 
 // Jquery Dependency
-$("input[data-type='currency_1']").on({
-  keyup: function() {
-    formatCurrency_1($(this));
-  },
-  blur: function() {
-    formatCurrency_1($(this), "blur");
-  }
-}).on('input', function() {
-  var input = $(this);
-  input.val(input.val().replace(/[^0-9.]/g, ''));
+$("input[data-type='currency_1']").on('keyup', function() {
+  formatCurrency_1($(this));
 });
 
 function formatNumber(n) {
   return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function formatCurrency_1(input, blur) {
+function formatCurrency_1(input) {
   var input_val = input.val();
 
   if (input_val === "") {
@@ -91,48 +83,26 @@ function formatCurrency_1(input, blur) {
     left_side = formatNumber(left_side);
     right_side = formatNumber(right_side);
 
-    if (blur === "blur") {
-      right_side += "00";
-    }
-
     right_side = right_side.substring(0, 2);
 
     input_val = "$" + left_side + "." + right_side;
   } else {
     input_val = formatNumber(input_val);
     input_val = "$" + input_val;
-
-    if (blur === "blur") {
-      input_val += ".00";
-    }
   }
 
-  input.val(input_val).trigger("change");
+  input.val(input_val);
 
   var updated_len = input_val.length;
   caret_pos = updated_len - original_len + caret_pos;
   input[0].setSelectionRange(caret_pos, caret_pos);
 }
 
-
-// Jquery Dependency
-$("input[data-type='currency_2']").on({
-  keyup: function() {
-    formatCurrency_2($(this));
-  },
-  blur: function() {
-    formatCurrency_2($(this), "blur");
-  }
-}).on('input', function() {
-  var input = $(this);
-  input.val(input.val().replace(/[^0-9.]/g, ''));
+$("input[data-type='currency_2']").on('keyup', function() {
+  formatCurrency_2($(this));
 });
 
-function formatNumber(n) {
-  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function formatCurrency_2(input, blur) {
+function formatCurrency_2(input) {
   var input_val = input.val();
 
   if (input_val === "") {
@@ -149,29 +119,20 @@ function formatCurrency_2(input, blur) {
     left_side = formatNumber(left_side);
     right_side = formatNumber(right_side);
 
-    if (blur === "blur") {
-      right_side += "00";
-    }
-
     right_side = right_side.substring(0, 2);
 
     input_val = "$" + left_side + "." + right_side;
   } else {
     input_val = formatNumber(input_val);
     input_val = "$" + input_val;
-
-    if (blur === "blur") {
-      input_val += ".00";
-    }
   }
 
-  input.val(input_val).trigger("change");
+  input.val(input_val);
 
   var updated_len = input_val.length;
   caret_pos = updated_len - original_len + caret_pos;
   input[0].setSelectionRange(caret_pos, caret_pos);
 }
-
 
 
 
