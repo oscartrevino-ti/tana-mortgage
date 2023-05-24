@@ -62,15 +62,18 @@ $("input[data-type='currency']").on({
   keyup: function() {
     formatCurrency($(this));
   },
-  blur: function() { 
+  blur: function() {
     formatCurrency($(this), "blur");
   }
+}).on('input', function() {
+  var input = $(this);
+  input.val(input.val().replace(/[^0-9.]/g, ''));
 });
 
 
 function formatNumber(n) {
 // format number 1000000 to 1,234,567
-return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
@@ -82,7 +85,9 @@ function formatCurrency(input, blur) {
 var input_val = input.val();
 
 // don't validate empty input
-if (input_val === "") { return; }
+if (input_val === "") {
+  return; 
+}
 
 // original length
 var original_len = input_val.length;
