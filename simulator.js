@@ -7,6 +7,7 @@ const pprocessingFee = 300 ;
 const appraisalCost = 2.5;
 
 
+
 const propertyValue = document.getElementById("propertyValue"); ////homevalue
 const amountRequest= document.getElementById("amountRequest");//loanamount
 const porcentLoan= document.getElementById("porcentLoan"); porcentLoan.readOnly = true;
@@ -142,7 +143,7 @@ function formatCurrency_2(input) {
 document.getElementById("EvaluateBtn").addEventListener("click", 
 function (e) {
   e.preventDefault();
-  
+
 
   if(amountRequest.value === "") {
     alert("El campo Amount Requested es requerido");
@@ -166,14 +167,23 @@ function (e) {
 
   
   porcentLoan.value = ((amountRequest.value.replace(/[^0-9.]/g, '') / propertyValue.value.replace(/[^0-9.]/g, ''))*100).toFixed(2)+" %";   ////Number()
-  let porcentLoanValue = porcentLoan.value
-  return (porcentLoanValue) ;
+  let porcentLoanValue = porcentLoan.value  
+    seventyPercent = parseInt(porcentLoanValue);
 
+    //alerta para cuando el request exede el 70% del valor de la propiedad
+    if (seventyPercent > 70) {
+      // Mostrar la alerta
+      alert("Los porcentajes máximos de crédito llegan hasta el 70% del valor de la propiedad.");
+      document.getElementById("mortgage");
+      mortgage.reset()
+    }
+    return(porcentLoanValue);
+  
 
   /*========================== 20 YEARS CALCULATE =============================*/
   function calculatePayment()
   {
-    
+
     /*========================== 20 YEARS CALCULATE =============================*/
     var payment20 = (amt*(apr * Math.pow((1 + apr), term20))/(Math.pow((1 + apr), term20) - 1)).toFixed(2);
     montlyPayment_20.value = payment20
@@ -220,6 +230,7 @@ function (e) {
     formatAndSetCurrencyValue(downPayment_20Value, downPayment_20);
     formatAndSetCurrencyValue(feesExpenses_20Value, feesExpenses_20);
     formatAndSetCurrencyValue(totalCosts20, closingCosts_20);
+
 
 
 
@@ -318,6 +329,7 @@ function (e) {
     formatAndSetCurrencyValue(feesExpenses_10Value, feesExpenses_10);
     formatAndSetCurrencyValue(totalCosts10, closingCosts_10);
 
+
     
   }
 
@@ -326,7 +338,7 @@ function (e) {
 
 
 /*========================== RESET FORM =============================*/
-  document.getElementById("ClearBtn").addEventListener("click", function(e){
+  document.getElementById("ClearBtn").addEventListener("click", function (e){
     e.preventDefault()
 
     document.getElementById("mortgage");
